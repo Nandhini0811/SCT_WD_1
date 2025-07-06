@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillCraftTechnology</title>
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Fonts: Poppins + Pacifico -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --home-heading: #d32f2f;
+      --about-heading: #1976d2;
+      --projects-heading: #388e3c;
+      --contact-heading: #7b1fa2;
+      --text-color: #222;
+      --bg-home: linear-gradient(to right, #ff9a9e, #fad0c4);
+      --bg-about: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      --bg-projects: linear-gradient(to right, #89f7fe, #66a6ff);
+      --bg-contact: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      --nav-bg: linear-gradient(to right, #333, #111);
+    }
+
+    body.dark-mode {
+      --home-heading: #ff6f61;
+      --about-heading: #64b5f6;
+      --projects-heading: #81c784;
+      --contact-heading: #ce93d8;
+      --text-color: #f5f5f5;
+      --bg-home: #1e1e1e;
+      --bg-about: #242424;
+      --bg-projects: #2e2e2e;
+      --bg-contact: #3a3a3a;
+      --nav-bg: linear-gradient(to right, #000, #222);
+      background-color: #121212;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      transition: background 0.5s, color 0.5s;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav.scrolled {
+      background: #000000ee;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      color: #ff9800;
+      white-space: nowrap;
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-center a {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      font-size: 1.05rem;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+    }
+
+    .nav-center a::after {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background-color: #ff9800;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-center a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ff9800;
+      transform: scale(1.05);
+    }
+
+    .nav-center a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .theme-toggle {
+      font-size: 1.4rem;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    section {
+      padding: 130px 20px 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: background 0.5s;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #home h2 { color: var(--home-heading); }
+    #about h2 { color: var(--about-heading); }
+    #projects h2 { color: var(--projects-heading); }
+    #contact h2 { color: var(--contact-heading); }
+
+    p {
+      max-width: 700px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    #home { background: var(--bg-home); }
+    #about { background: var(--bg-about); }
+    #projects { background: var(--bg-projects); }
+    #contact { background: var(--bg-contact); }
+
+    .contact-info {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: var(--contact-heading);
+      font-size: 1.6rem;
+      margin: 0 10px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #000;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-center {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        padding-top: 10px;
+      }
+
+      .nav-center.active {
+        display: flex;
+      }
+
+      .nav-center a {
+        width: 100%;
+        padding: 10px 20px;
+        text-align: left;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
+        align-self: flex-start;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="navbar-container">
+      <div class="brand">SkillCraftTechnology</div>
+      <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
+      <div class="nav-center" id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <div class="theme-toggle" id="themeToggle" title="Toggle Theme">🌙</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sections -->
+  <section id="home">
+    <h2><i class="fas fa-home"></i> Welcome to SkillCraft</h2>
+    <p>SkillCraftTechnology empowers creators and learners through real-world skills in web development, design, and more. Begin your journey with us and turn ideas into impact.</p>
+  </section>
+
+  <section id="about">
+    <h2><i class="fas fa-users"></i> About Us</h2>
+    <p>We are a dynamic team focused on merging technology and creativity. SkillCraft helps learners go from beginner to pro through projects, practice, and mentorship.</p>
+  </section>
+
+  <section id="projects">
+    <h2><i class="fas fa-laptop-code"></i> Our Projects</h2>
+    <p>Explore SkillCraft’s portfolio of interactive tools, responsive websites, and open-source innovations — crafted by and for students, developers, and designers alike.</p>
+  </section>
+
+  <section id="contact">
+    <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+    <p>Want to work with us or have questions? We'd love to connect! Reach out by email or follow our social channels below.</p>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:contact@skillcraft.com">contact@skillcraft.com</a></p>
+      <p>Phone: +91 98765 43210</p>
+    </div>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
+
+  <!-- Script -->
+  <script>
+    const navbar = document.getElementById("navbar");
+    const themeToggle = document.getElementById("themeToggle");
+    const navToggle = document.getElementById("navToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    // Scroll behavior
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Theme toggle
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      themeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
+
+    // Mobile nav toggle
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
